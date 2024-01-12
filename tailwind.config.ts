@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        header: ['var(--kumbh-sans)'],
+        body: ['var(--jet-brain-mono)']
+      }
     },
   },
   plugins: [],

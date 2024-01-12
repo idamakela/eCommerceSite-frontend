@@ -1,8 +1,14 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { JetBrains_Mono, Kumbh_Sans } from 'next/font/google'
 import './globals.css'
+import Header from '@/components/Header'
+import { cn } from '@/utils/classnames'
 
-const inter = Inter({ subsets: ['latin'] })
+const jetBrainMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--jet-brain-mono',
+})
+const kumbhSans = Kumbh_Sans({ subsets: ['latin'], variable: '--kumbh-sans' })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -15,8 +21,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang='en'>
+      <body
+        className={cn(jetBrainMono.variable, kumbhSans.variable, 'font-body')}
+      >
+        <Header />
+        {children}
+      </body>
     </html>
   )
 }
