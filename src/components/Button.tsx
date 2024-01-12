@@ -3,12 +3,12 @@ import { VariantProps, cva } from 'class-variance-authority'
 import { cn } from '@/utils/classnames'
 
 export const buttonVariants = cva(
-  'p-3 md:p-5 font-semibold transition duration-300 border-transparent uppercase',
+  'p-3 md:p-5 transition duration-300 border-transparent uppercase',
   {
     variants: {
       variant: {
         filled: 'bg-black text-white hover:bg-white hover:text-black border-2 hover:border-black',
-        ghost: 'text-black p-0 border-b-2 hover:border-black',
+        ghost: 'text-black p-0 md:p-0 border-b-2 hover:border-black',
         outline: 'bg-none text-black border-2 border-black hover:bg-black hover:text-white',
       },
     },

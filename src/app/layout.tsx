@@ -1,6 +1,7 @@
-import type { Metadata } from 'next'
-import { JetBrains_Mono, Kumbh_Sans } from 'next/font/google'
 import './globals.css'
+import { JetBrains_Mono, Kumbh_Sans } from 'next/font/google'
+import type { Metadata } from 'next'
+
 import Header from '@/components/Header'
 import { cn } from '@/utils/classnames'
 
@@ -23,7 +24,11 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={cn(jetBrainMono.variable, kumbhSans.variable, 'font-body')}
+        className={cn(
+          jetBrainMono.variable,
+          kumbhSans.variable,
+          'p-8 font-body',
+        )}
       >
         <Header />
         {children}

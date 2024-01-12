@@ -1,7 +1,3 @@
 export default function Home() {
-  return (
-    <main>
-      <h1>main page</h1>
-    </main>
-  )
+  return <main className='h-[200vh] bg-neutral-300'></main>
 }
