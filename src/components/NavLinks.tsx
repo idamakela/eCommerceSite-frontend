@@ -1,29 +1,28 @@
-'use client' //TODO: pre-fetching data
-import useSWR, { preload } from 'swr'
 import Link from 'next/link'
-import { getCategories } from '@/api/categories'
-import { categoriesEndpoint as cacheKey } from '@/api/endpoints'
+import useSWR from 'swr'
 
 import Button from './Button'
-import { Category } from '@/utils/types'
+import { CategoryAndSubcategory } from '@/utils/types'
 
 interface Props {
   classnames?: string
+  endpoint: string
+  fetcher: () => void
 }
 
-const NavLinks = ({ classnames }: Props) => {
+const NavLinks = ({ classnames, endpoint, fetcher }: Props) => {
   const {
     isLoading,
     error,
-    data: { data = [] } = {} as { data: Category[] },
-  } = useSWR(cacheKey, getCategories)
+    data: { data = [] } = {} as { data: CategoryAndSubcategory[] },
+  } = useSWR(endpoint, fetcher)
 
   return (
     <>
-      {data?.map((category) => (
-        <Link key={category.id} href={`/category/${category.attributes.slug}`}>
+      {data?.map((item) => (
+        <Link key={item.id} href={`/${endpoint}/${item.attributes.slug}`}>
           <Button variant='ghost' className={classnames}>
-            {category.attributes.slug}
+            {item.attributes.title}
           </Button>
         </Link>
       ))}

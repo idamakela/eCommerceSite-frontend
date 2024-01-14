@@ -1,15 +1,60 @@
-import NavLinks from './NavLinks'
-import { cn } from '@/utils/classnames'
+import Link from 'next/link'
+import { SWRConfig } from 'swr'
+import { getCategories } from '@/api/categories'
+import { categoriesEndpoint, subcategoriesEndpoint } from '@/api/endpoints'
 
+import NavLinks from './NavLinks'
+import Button from './Button'
+import { cn } from '@/utils/classnames'
+import { getSubcategories } from '@/api/subcategories'
+import { CategoryAndSubcategoryRes } from '@/utils/types'
+
+export async function getStaticProps() {
+  const category: CategoryAndSubcategoryRes = await getCategories()
+  const subcategory: CategoryAndSubcategoryRes = await getSubcategories()
+
+  return {
+    props: {
+      fallback: {
+        categoriesEndpoint: category,
+        subcategoriesEndpoint: subcategory,
+      },
+    },
+  }
+}
 interface Props {
   open: boolean
+  category?: CategoryAndSubcategoryRes
+  subcategory?: CategoryAndSubcategoryRes
 }
 
-const Navigation = ({ open }: Props) => {
+const Navigation = ({ open, category, subcategory }: Props) => {
   return (
-    <nav className={cn('mt-20 hidden flex-col gap-7', open && 'flex h-screen')}>
-      <NavLinks />
-    </nav>
+    <SWRConfig value={{ fallback: { category, subcategory } }}>
+      <nav
+        className={cn(
+          'mt-20 hidden auto-rows-max grid-cols-2 gap-y-7',
+          open && 'grid h-screen',
+        )}
+      >
+        <div className='col-span-2'>
+          <Link href='/category/products'>
+            <Button variant='filled' className='w-full'>
+              all products
+            </Button>
+          </Link>
+        </div>
+        <div className='row-start-2 flex flex-col gap-7'>
+          <NavLinks endpoint={categoriesEndpoint} fetcher={getCategories} />
+        </div>
+        <div className='row-start-2 flex flex-col gap-7'>
+          <NavLinks
+            endpoint={subcategoriesEndpoint}
+            fetcher={getSubcategories}
+          />
+        </div>
+      </nav>
+    </SWRConfig>
   )
 }
 

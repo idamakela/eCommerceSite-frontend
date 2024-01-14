@@ -1,5 +1,5 @@
-export type CategoryRes = {
-  data: Category[]
+export type CategoryAndSubcategoryRes = {
+  data: CategoryAndSubcategory[]
   meta: Meta
 }
 
@@ -11,7 +11,7 @@ export type Meta = {
   total: number
 }
 
-export type Category = {
+export type CategoryAndSubcategory = {
   id: number
   attributes: {
     title: string
