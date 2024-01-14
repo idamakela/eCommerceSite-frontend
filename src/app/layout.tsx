@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 
 import Header from '@/components/Header'
 import { cn } from '@/utils/classnames'
+import Head from 'next/head'
 
 const jetBrainMono = JetBrains_Mono({
   subsets: ['latin'],

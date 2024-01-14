@@ -1,4 +1,5 @@
 'use client'
+// TODO: if there are more categories than header desktop view allows, expand option should exist. 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useMediaQuery } from '@uidotdev/usehooks'
@@ -37,7 +38,9 @@ const Header = () => {
           )}
         </div>
         <div className='flex gap-2'>
-          <ShoppingBag />
+          <Link href='/checkout'>
+            <ShoppingBag />
+          </Link>
           {md && (
             <button onClick={() => setOpen(!open)}>
               {open ? <X /> : <Menu />}

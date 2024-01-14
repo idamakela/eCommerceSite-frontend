@@ -1,10 +1,11 @@
 'use client' //TODO: pre-fetching data
-import useSWR from 'swr'
+import useSWR, { preload } from 'swr'
 import Link from 'next/link'
-import { getCategories, categoriesEndpoint as cacheKey } from '@/api/categories'
+import { getCategories } from '@/api/categories'
+import { categoriesEndpoint as cacheKey } from '@/api/endpoints'
 
 import Button from './Button'
-import type { ICategories } from '@/utils/types'
+import { Category } from '@/utils/types'
 
 interface Props {
   classnames?: string
@@ -14,15 +15,15 @@ const NavLinks = ({ classnames }: Props) => {
   const {
     isLoading,
     error,
-    data: categories,
-  } = useSWR<ICategories>(cacheKey, getCategories)
+    data: { data = [] } = {} as { data: Category[] },
+  } = useSWR(cacheKey, getCategories)
 
   return (
     <>
-      {categories?.map((category) => (
-        <Link key={category.id} href={`/category/${category.slug}`}>
+      {data?.map((category) => (
+        <Link key={category.id} href={`/category/${category.attributes.slug}`}>
           <Button variant='ghost' className={classnames}>
-            {category.category}
+            {category.attributes.slug}
           </Button>
         </Link>
       ))}
