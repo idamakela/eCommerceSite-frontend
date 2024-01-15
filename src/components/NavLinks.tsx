@@ -17,6 +17,9 @@ const NavLinks = ({ classnames, endpoint, fetcher }: Props) => {
     data: { data = [] } = {} as { data: CategoryAndSubcategory[] },
   } = useSWR(endpoint, fetcher)
 
+  // TODO: error handling
+  // TODO: isLoading handling
+
   return (
     <>
       {data?.map((item) => (

@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useMediaQuery } from 'usehooks-ts'
 import { useEffect, useState } from 'react'
 import { Menu, Ratio, ShoppingBag, X } from 'lucide-react'
 
@@ -11,6 +12,7 @@ import { cn } from '@/utils/classnames'
 const Header = () => {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
+  const md = useMediaQuery('(min-width: 768px)')  
 
   useEffect(() => {
     setOpen(false)

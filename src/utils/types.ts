@@ -21,3 +21,5 @@ export type CategoryAndSubcategory = {
     publishedAt: string
   }
 }
+
+export type ButtonVariants = 'filled' | 'ghost' | 'outline' | null | undefined
