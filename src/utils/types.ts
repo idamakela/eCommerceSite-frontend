@@ -33,9 +33,9 @@ export type ButtonVariants =
   | undefined
 
 export type ProductCard = {
-  title: string
-  slug: string
-  price: number
-  imgUrl: string | StaticImageData
-  imgName: string
+  title?: string
+  slug?: string
+  price?: number
+  imgUrl?: string | StaticImageData
+  imgName?: string
 }

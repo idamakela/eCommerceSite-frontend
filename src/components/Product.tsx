@@ -14,7 +14,7 @@ const Product = ({
   return (
     <>
       <Link href={slug} className='group/productCard'>
-        <Image src={imgUrl} alt={imgName} height={500} />
+        <Image src={imgUrl} alt={imgName} height={500} priority={true} />
         <div className='transition-all duration-300 group-hover/productCard:pl-3'>
           <h4 className='pt-1 text-sm capitalize md:text-base'>{title}</h4>
           <p className='pt-1 text-xs md:text-sm'>{price}</p>
