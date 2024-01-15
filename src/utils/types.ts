@@ -1,3 +1,5 @@
+import { StaticImageData } from 'next/image'
+
 export type CategoryAndSubcategoryRes = {
   data: CategoryAndSubcategory[]
   meta: Meta
@@ -22,4 +24,18 @@ export type CategoryAndSubcategory = {
   }
 }
 
-export type ButtonVariants = 'filled' | 'ghost' | 'outline' | 'muted' | null | undefined
+export type ButtonVariants =
+  | 'filled'
+  | 'ghost'
+  | 'outline'
+  | 'muted'
+  | null
+  | undefined
+
+export type ProductCard = {
+  title: string
+  slug: string
+  price: number
+  imgUrl: string | StaticImageData
+  imgName: string
+}
