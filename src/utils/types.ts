@@ -22,4 +22,4 @@ export type CategoryAndSubcategory = {
   }
 }
 
-export type ButtonVariants = 'filled' | 'ghost' | 'outline' | null | undefined
+export type ButtonVariants = 'filled' | 'ghost' | 'outline' | 'muted' | null | undefined

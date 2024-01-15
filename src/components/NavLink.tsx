@@ -7,14 +7,14 @@ interface Props {
   href: string
   classnames?: string
   variant?: ButtonVariants
-  title: string
+  children: string
 }
 
-const NavLink = ({ href, classnames, variant, title }: Props) => {
+const NavLink = ({ href, classnames, variant, children }: Props) => {
   return (
     <Link href={href}>
       <Button variant={variant} className={classnames}>
-        {title}
+        {children}
       </Button>
     </Link>
   )

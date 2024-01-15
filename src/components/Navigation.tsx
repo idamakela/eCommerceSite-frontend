@@ -1,10 +1,9 @@
-import Link from 'next/link'
 import { SWRConfig } from 'swr'
 import { getCategories } from '@/api/categories'
 import { categoriesEndpoint, subcategoriesEndpoint } from '@/api/endpoints'
 
+import NavLink from './NavLink'
 import NavLinks from './NavLinks'
-import Button from './Button'
 import { cn } from '@/utils/classnames'
 import { getSubcategories } from '@/api/subcategories'
 import { CategoryAndSubcategoryRes } from '@/utils/types'
@@ -38,21 +37,30 @@ const Navigation = ({ open, category, subcategory }: Props) => {
         )}
       >
         <div className='col-span-2'>
-          <Link href='/category/products'>
-            <Button variant='filled' className='w-full'>
-              all products
-            </Button>
-          </Link>
-        </div>
-        <div className='row-start-2 flex flex-col gap-7'>
-          <NavLinks endpoint={categoriesEndpoint} fetcher={getCategories} />
+          <NavLink
+            href='/category/products'
+            variant={'filled'}
+            classnames='w-full'
+          >
+            all products
+          </NavLink>
         </div>
         <div className='row-start-2 flex flex-col gap-7'>
           <NavLinks
-            endpoint={subcategoriesEndpoint}
-            fetcher={getSubcategories}
+            cachekey={categoriesEndpoint}
+            fetcher={getCategories}
+            endpoint={'category'}
           />
         </div>
+
+        {/* <div className='row-start-2 flex flex-col gap-7'>
+          <NavLinks
+            cachekey={subcategoriesEndpoint}
+            fetcher={getSubcategories}
+            endpoint={'subcategory'}
+          />
+        </div> */}
+        
       </nav>
     </SWRConfig>
   )

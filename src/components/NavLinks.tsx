@@ -1,33 +1,37 @@
-import Link from 'next/link'
 import useSWR from 'swr'
 
-import Button from './Button'
+import NavLink from './NavLink'
 import { CategoryAndSubcategory } from '@/utils/types'
 
 interface Props {
   classnames?: string
-  endpoint: string
+  cachekey: string
   fetcher: () => void
+  endpoint: 'category' | 'subcategory'
 }
 
-const NavLinks = ({ classnames, endpoint, fetcher }: Props) => {
+const NavLinks = ({ classnames, cachekey, fetcher, endpoint }: Props) => {
   const {
     isLoading,
     error,
     data: { data = [] } = {} as { data: CategoryAndSubcategory[] },
-  } = useSWR(endpoint, fetcher)
+  } = useSWR(cachekey, fetcher)
 
   // TODO: error handling
   // TODO: isLoading handling
+  // ERROR: endpoint is incorrect to frontend
 
   return (
     <>
       {data?.map((item) => (
-        <Link key={item.id} href={`/${endpoint}/${item.attributes.slug}`}>
-          <Button variant='ghost' className={classnames}>
-            {item.attributes.title}
-          </Button>
-        </Link>
+        <NavLink
+          key={item.id}
+          href={`/${endpoint}/${item.attributes.slug}`}
+          variant={'ghost'}
+          classnames={classnames}
+        >
+          {item.attributes.title}
+        </NavLink>
       ))}
     </>
   )
