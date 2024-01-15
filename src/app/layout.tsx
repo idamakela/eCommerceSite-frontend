@@ -27,7 +27,7 @@ export default function RootLayout({
         className={cn(
           jetBrainMono.variable,
           kumbhSans.variable,
-          'p-8 font-body',
+          'font-body',
         )}
       >
         <Header />

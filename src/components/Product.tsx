@@ -2,14 +2,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { ProductCard } from '@/utils/types'
-import defaultImage from '../../public/mulyadi-ZnLprInKM7s-unsplash.jpg'
+import defaultImage from '@/assets/mulyadi-ZnLprInKM7s-unsplash.jpg'
 
 const Product = ({
   title = 'Not Found',
   price = 99.99,
   imgUrl = defaultImage,
   imgName = 'Image not found',
-  slug = '/',
+  slug = '/product/not-found',
 }: ProductCard) => {
   return (
     <>
