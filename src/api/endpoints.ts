@@ -1,3 +1,3 @@
 export const categoriesEndpoint = '/api/categories'
 
-export const subcategoriesEndpoint = 'api/subcategories'
+export const subcategoriesEndpoint = '/api/subcategories'

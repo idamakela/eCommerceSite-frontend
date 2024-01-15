@@ -12,11 +12,18 @@ export async function getStaticProps() {
   const category: CategoryAndSubcategoryRes = await getCategories()
   const subcategory: CategoryAndSubcategoryRes = await getSubcategories()
 
+  if (
+    categoriesEndpoint !== '/api/categories' ||
+    subcategoriesEndpoint !== '/api/subcategories'
+  ) {
+    return console.log('build fetch fallback error')
+  }
+
   return {
     props: {
       fallback: {
-        categoriesEndpoint: category,
-        subcategoriesEndpoint: subcategory,
+        '/api/categories': category,
+        '/api/subcategories': subcategory,
       },
     },
   }
@@ -60,7 +67,6 @@ const Navigation = ({ open, category, subcategory }: Props) => {
             endpoint={'subcategory'}
           />
         </div> */}
-        
       </nav>
     </SWRConfig>
   )
