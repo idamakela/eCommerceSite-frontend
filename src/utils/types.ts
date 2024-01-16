@@ -26,9 +26,10 @@ export type CategoryAndSubcategory = {
 
 export type ButtonVariants =
   | 'filled'
-  | 'ghost'
+  | 'underline'
   | 'outline'
   | 'muted'
+  | 'ghost'
   | null
   | undefined
 

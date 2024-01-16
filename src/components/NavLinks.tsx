@@ -27,7 +27,7 @@ const NavLinks = ({ classnames, cachekey, fetcher, endpoint }: Props) => {
         <NavLink
           key={item.id}
           href={`/${endpoint}/${item.attributes.slug}`}
-          variant={'ghost'}
+          variant={'underline'}
           classnames={classnames}
         >
           {item.attributes.title}

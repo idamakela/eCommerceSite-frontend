@@ -7,10 +7,14 @@ export const buttonVariants = cva(
   {
     variants: {
       variant: {
-        filled: 'bg-black text-white hover:bg-white hover:text-black border-2 hover:border-black',
-        ghost: 'text-black p-0 md:p-0 border-b-2 hover:border-black',
-        outline: 'bg-none text-black border-2 border-black hover:bg-black hover:text-white',
-        muted: 'bg-neutral-200 text-neutral-600 text-xs p-1 md:p-2 hover:text-black'
+        filled:
+          'bg-black text-white hover:bg-white hover:text-black border-2 hover:border-black',
+        underline: 'text-black p-0 md:p-0 border-b-2 hover:border-black',
+        outline:
+          'bg-none text-black border-2 border-black hover:bg-black hover:text-white',
+        muted:
+          'bg-neutral-200 text-neutral-600 text-xs p-1 md:p-2 hover:text-black',
+        ghost: 'text-black p-0 md:p-0 border-b-2',
       },
     },
     defaultVariants: {
