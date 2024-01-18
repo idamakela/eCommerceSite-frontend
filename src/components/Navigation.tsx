@@ -16,7 +16,7 @@ export async function getStaticProps() {
     categoriesEndpoint !== '/api/categories' ||
     subcategoriesEndpoint !== '/api/subcategories'
   ) {
-    return console.log('build fetch fallback error')
+    return console.log('build fetch fallback error in navigation')
   }
 
   return {
