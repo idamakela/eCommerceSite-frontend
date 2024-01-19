@@ -1,5 +1,7 @@
-import { getFooter } from '@/api/single-types'
+import Link from 'next/link'
+
 import Logo from './Logo'
+import { getFooter } from '@/api/single-types'
 
 const Footer = async () => {
   const data = await getFooter()
@@ -11,7 +13,9 @@ const Footer = async () => {
       </h3>
       <p className='text-center text-xs'>{data?.data?.attributes?.desc}</p>
       <div className='pb-14 pt-28'>
-        <Logo />
+        <Link href='/'>
+          <Logo />
+        </Link>
       </div>
     </footer>
   )

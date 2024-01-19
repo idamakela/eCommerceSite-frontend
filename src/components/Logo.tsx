@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import Link from 'next/link'
 
 import { getLogo } from '@/api/single-types'
 
@@ -7,7 +6,7 @@ const Logo = async () => {
   const data = await getLogo()
 
   return (
-    <Link href='/' className='flex w-fit items-center justify-center gap-2'>
+    <div className='flex w-fit items-center justify-center gap-2'>
       <Image
         src={data?.data?.attributes?.img.data.attributes.url}
         alt='logo'
@@ -18,7 +17,7 @@ const Logo = async () => {
       <h2 className='font-header font-semibold uppercase'>
         {data?.data?.attributes?.name}
       </h2>
-    </Link>
+    </div>
   )
 }
 
