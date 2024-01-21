@@ -40,3 +40,16 @@ export type ProductCard = {
   imgUrl?: string | StaticImageData
   imgName?: string
 }
+
+export type Navigation = {
+  id: number
+  title: string
+  slug: string
+  subcategories: Subcategory[]
+}
+
+export type Subcategory = {
+  id: number
+  title: string
+  slug: string
+}

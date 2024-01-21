@@ -1,49 +1,37 @@
-import { SWRConfig } from 'swr'
-import { getCategories } from '@/api/categories'
-import { categoriesEndpoint, subcategoriesEndpoint } from '@/api/endpoints'
+'use client'
+
+import { useEffect } from 'react'
+import useSWR, { preload } from 'swr'
+import { usePathname } from 'next/navigation'
 
 import NavLink from './NavLink'
 import NavLinks from './NavLinks'
-import { cn } from '@/utils/classnames'
-import { getSubcategories } from '@/api/subcategories'
-import { CategoryAndSubcategoryRes } from '@/utils/types'
+import { useNavigation } from '@/hooks/useNavigation'
+import { useLockScroll } from '@/hooks/useLockScreen'
+import { getNavigation as fetcher } from '@/api/categories'
+import { categoriesEndpoint as cacheKey } from '@/api/endpoints'
 
-export async function getStaticProps() {
-  const category: CategoryAndSubcategoryRes = await getCategories()
-  const subcategory: CategoryAndSubcategoryRes = await getSubcategories()
+const Navigation = () => {
+  const { error, isLoading, data } = useSWR(cacheKey, fetcher)
+  const { open, setOpen } = useNavigation()
+  const pathname = usePathname()
+  useLockScroll(open)
 
-  if (
-    categoriesEndpoint !== '/api/categories' ||
-    subcategoriesEndpoint !== '/api/subcategories'
-  ) {
-    return console.log('build fetch fallback error in navigation')
-  }
+  useEffect(() => {
+    preload(cacheKey, fetcher)
+  }, [])
 
-  return {
-    props: {
-      fallback: {
-        '/api/categories': category,
-        '/api/subcategories': subcategory,
-      },
-    },
-  }
-}
-interface Props {
-  open: boolean
-  category?: CategoryAndSubcategoryRes
-  subcategory?: CategoryAndSubcategoryRes
-}
+  useEffect(() => {
+    setOpen(false)
+  }, [pathname, setOpen])
 
-const Navigation = ({ open, category, subcategory }: Props) => {
+  // TODO: error handling
+  // TODO: isLoading handling
+
   return (
-    <SWRConfig value={{ fallback: { category, subcategory } }}>
-      <nav
-        className={cn(
-          'mt-20 hidden auto-rows-max grid-cols-2 gap-y-7',
-          open && 'grid h-screen',
-        )}
-      >
-        <div className='col-span-2'>
+    <>
+      {open && (
+        <nav className='h-nav mt-[5.5rem] flex flex-col gap-y-7 bg-white'>
           <NavLink
             href='/category/products'
             variant={'filled'}
@@ -51,24 +39,12 @@ const Navigation = ({ open, category, subcategory }: Props) => {
           >
             all products
           </NavLink>
-        </div>
-        <div className='row-start-2 flex flex-col gap-7'>
-          <NavLinks
-            cachekey={categoriesEndpoint}
-            fetcher={getCategories}
-            endpoint={'category'}
-          />
-        </div>
-
-        {/* <div className='row-start-2 flex flex-col gap-7'>
-          <NavLinks
-            cachekey={subcategoriesEndpoint}
-            fetcher={getSubcategories}
-            endpoint={'subcategory'}
-          />
-        </div> */}
-      </nav>
-    </SWRConfig>
+          <div className='flex flex-col gap-y-7 overflow-x-hidden overflow-y-scroll pb-7 lg:flex-row lg:justify-evenly'>
+            {data && <NavLinks data={data} />}
+          </div>
+        </nav>
+      )}
+    </>
   )
 }
 

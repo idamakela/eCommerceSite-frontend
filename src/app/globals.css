@@ -74,3 +74,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .h-nav {
+    height: calc(100svh - 42px - 3rem);
+  }
+}
