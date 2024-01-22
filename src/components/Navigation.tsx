@@ -2,9 +2,9 @@
 
 import { useEffect } from 'react'
 import useSWR, { preload } from 'swr'
-import { usePathname } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
-import NavLink from './NavLink'
+import Button from './Button'
 import NavLinks from './NavLinks'
 import { useNavigation } from '@/hooks/useNavigation'
 import { useLockScroll } from '@/hooks/useLockScreen'
@@ -14,17 +14,24 @@ import { categoriesEndpoint as cacheKey } from '@/api/endpoints'
 const Navigation = () => {
   const { error, isLoading, data } = useSWR(cacheKey, fetcher)
   const { open, setOpen } = useNavigation()
-  const pathname = usePathname()
+  const router = useRouter()
   useLockScroll(open)
 
   useEffect(() => {
     preload(cacheKey, fetcher)
   }, [])
 
-  useEffect(() => {
-    setOpen(false)
-  }, [pathname, setOpen])
+  const handleRouting = (category?: string, subcategory?: string) => {
+    if (category) {
+      router.push(`/category/${category}`)
+    }
 
+    if (category && subcategory) {
+      router.push(`/category/${category}?subcategory=${subcategory}`)
+    }
+
+    setOpen(false)
+  }
   // TODO: error handling
   // TODO: isLoading handling
 
@@ -32,15 +39,15 @@ const Navigation = () => {
     <>
       {open && (
         <nav className='h-nav mt-[5.5rem] flex flex-col gap-y-7 bg-white'>
-          <NavLink
-            href='/category/products'
-            variant={'filled'}
-            classnames='w-full'
+          <Button
+            onClick={() => handleRouting('products')}
+            variant='filled'
+            className='w-full'
           >
             all products
-          </NavLink>
+          </Button>
           <div className='flex flex-col gap-y-7 overflow-x-hidden overflow-y-scroll pb-7 lg:flex-row lg:justify-evenly'>
-            {data && <NavLinks data={data} />}
+            {data && <NavLinks data={data} handleRouting={handleRouting} />}
           </div>
         </nav>
       )}

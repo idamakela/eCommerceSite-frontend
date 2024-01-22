@@ -2,11 +2,10 @@
 
 import { useMediaQuery } from 'usehooks-ts'
 import { useEffect, useState } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { ChevronDown, ChevronRight, ChevronUp } from 'lucide-react'
 
 import Button from './Button'
-import NavLink from './NavLink'
 import { cn } from '@/utils/classnames'
 import { Navigation, Subcategory } from '@/utils/types'
 
@@ -14,11 +13,11 @@ interface Props {
   data: Navigation[] | Subcategory[]
   category?: string
   level?: number
+  handleRouting: (category?: string, subcategory?: string) => void
 }
 
-const NavLinks = ({ data, category, level = 0 }: Props) => {
+const NavLinks = ({ data, category, level = 0, handleRouting }: Props) => {
   const [openParents, setOpenParents] = useState<string[]>([])
-  const router = useRouter()
   const pathname = usePathname()
   const lg = useMediaQuery('(min-width: 1024px)')
 
@@ -27,12 +26,6 @@ const NavLinks = ({ data, category, level = 0 }: Props) => {
       setOpenParents(openParents.filter((item) => item !== title))
     } else {
       setOpenParents([...openParents, title])
-    }
-  }
-
-  const handleSubcategory = (category?: string, subcategory?: string) => {
-    if (category && subcategory) {
-      router.push(`/category/${category}?subcategory=${subcategory}`)
     }
   }
 
@@ -70,7 +63,7 @@ const NavLinks = ({ data, category, level = 0 }: Props) => {
             </Button>
           ) : (
             <Button
-              onClick={() => handleSubcategory(category, item.slug)}
+              onClick={() => handleRouting(category, item.slug)}
               variant='underline'
               className='w-full text-left'
             >
@@ -80,17 +73,19 @@ const NavLinks = ({ data, category, level = 0 }: Props) => {
 
           {'subcategories' in item && openParents.includes(item.title) && (
             <div className='ml-12 flex flex-col gap-y-7 lg:m-0'>
-              <NavLink
-                href={`/category/${item.slug}`}
+              <Button
+                // href={`/category/${item.slug}`}
+                onClick={() => handleRouting(item.slug)}
                 variant='underline'
-                classnames='w-full text-left'
+                className='w-full text-left'
               >
                 all products
-              </NavLink>
+              </Button>
               <NavLinks
                 data={item.subcategories}
                 category={item.slug}
                 level={level + 1}
+                handleRouting={handleRouting}
               />
             </div>
           )}

@@ -8,7 +8,7 @@ import NavigationHandler from './NavigationHandler'
 const Header = () => {
   return (
     <>
-      <header className='fixed left-0 top-0 w-full bg-transparent p-8 font-header'>
+      <header className='fixed left-0 top-0 w-full bg-transparent px-3 py-8 font-header md:p-8'>
         <div className='flex items-center justify-between'>
           <Link href='/'>
             <Logo />
