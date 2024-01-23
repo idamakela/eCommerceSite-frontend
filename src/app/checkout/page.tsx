@@ -3,10 +3,10 @@
  * Filled checkout - basket and checkout in the same? or different pages? condition to get to checkout (does next have build in functionality for that?)?
  */
 
-import CheckoutForm from '@/components/CheckoutForm'
-import CheckoutItem from '@/components/CheckoutItem'
+import CheckoutForm from './_components/CheckoutForm'
+import CheckoutItem from './_components/CheckoutItem'
 
-const Checkout = () => {
+export default function CheckoutPage() {
   return (
     <main className='mt-36 box-border flex min-h-screen flex-col px-4'>
       <div className='mb-20'>
@@ -31,5 +31,3 @@ const Checkout = () => {
     </main>
   )
 }
-
-export default Checkout

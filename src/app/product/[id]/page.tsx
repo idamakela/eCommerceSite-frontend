@@ -1,4 +1,4 @@
-import Product from '@/components/Product'
+import Product from '../_components/Product'
 
 export default function ProductPage({ params }: { params: { id: string } }) {
   console.log(params.id)

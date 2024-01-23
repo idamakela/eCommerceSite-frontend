@@ -1,4 +1,4 @@
-import ProductCard from '@/components/ProductCard'
+import ProductCard from '../_components/ProductCard'
 import { Products } from '@/utils/types'
 
 // TODO: pagination

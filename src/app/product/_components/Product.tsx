@@ -2,7 +2,7 @@
 
 import Image, { StaticImageData } from 'next/image'
 
-import Button from './Button'
+import Button from '../../../components/Button'
 import defaultImage from '@/assets/mulyadi-ZnLprInKM7s-unsplash.jpg'
 
 interface Props {

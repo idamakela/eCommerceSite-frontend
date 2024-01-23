@@ -1,8 +1,8 @@
+import { X } from 'lucide-react'
 import Image, { StaticImageData } from 'next/image'
 
+import Button from '@/components/Button'
 import defaultImg from '@/assets/mulyadi-ZnLprInKM7s-unsplash.jpg'
-import { X } from 'lucide-react'
-import Button from './Button'
 
 interface CheckoutItemProps {
   imgUrl?: string | StaticImageData
