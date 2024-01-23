@@ -1,29 +1,3 @@
-import { StaticImageData } from 'next/image'
-
-export type CategoryAndSubcategoryRes = {
-  data: CategoryAndSubcategory[]
-  meta: Meta
-}
-
-export type Meta = {
-  pagination: number
-  page: number
-  pageCount: number
-  pageSize: number
-  total: number
-}
-
-export type CategoryAndSubcategory = {
-  id: number
-  attributes: {
-    title: string
-    slug: string
-    createdAt: string
-    updatedAt: string
-    publishedAt: string
-  }
-}
-
 export type ButtonVariants =
   | 'filled'
   | 'underline'
@@ -33,12 +7,10 @@ export type ButtonVariants =
   | null
   | undefined
 
-export type ProductCard = {
-  title?: string
-  slug?: string
-  price?: number
-  imgUrl?: string | StaticImageData
-  imgName?: string
+export type Subcategory = {
+  id: number
+  title: string
+  slug: string
 }
 
 export type Navigation = {
@@ -48,8 +20,39 @@ export type Navigation = {
   subcategories: Subcategory[]
 }
 
-export type Subcategory = {
+export type Product = {
   id: number
-  title: string
-  slug: string
+  attributes: {
+    title: string
+    slug: string
+    price: number
+    img: {
+      data: {
+        id: number
+        attributes: {
+          formats: {
+            small: {
+              url: string
+              name: string
+              mime: string
+              height: number
+              width: number
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+export type Products = {
+  data: Product[]
+  meta: {
+    pagination: {
+      page: number
+      pageSize: number
+      pageCount: number
+      total: number
+    }
+  }
 }

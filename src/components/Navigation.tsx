@@ -23,11 +23,11 @@ const Navigation = () => {
 
   const handleRouting = (category?: string, subcategory?: string) => {
     if (category) {
-      router.push(`/category/${category}`)
+      router.push(`/products/${category}`)
     }
 
     if (category && subcategory) {
-      router.push(`/category/${category}?subcategory=${subcategory}`)
+      router.push(`/products/${category}?subcategory=${subcategory}`)
     }
 
     setOpen(false)
@@ -39,11 +39,7 @@ const Navigation = () => {
     <>
       {open && (
         <nav className='h-nav mt-[5.5rem] flex flex-col gap-y-7 bg-white'>
-          <Button
-            onClick={() => handleRouting('products')}
-            variant='filled'
-            className='w-full'
-          >
+          <Button onClick={() => handleRouting('products')} variant='filled' className='w-full'>
             all products
           </Button>
           <div className='flex flex-col gap-y-7 overflow-x-hidden overflow-y-scroll pb-7 lg:flex-row lg:justify-evenly'>
