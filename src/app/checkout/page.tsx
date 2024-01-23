@@ -15,7 +15,7 @@ const Checkout = () => {
         </h1>
       </div>
 
-      <div className='grid grid-cols-1 gap-8 md:gap-5 md:grid-cols-2'>
+      <div className='grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-5'>
         <div>
           <h2 className='border-b-2 pb-2 uppercase'>items</h2>
           {Array.from({ length: 3 }, (_, index) => (
@@ -24,10 +24,9 @@ const Checkout = () => {
         </div>
 
         <div className='mb-5'>
-          <h2 className='border-b-2 pb-2 mb-5 uppercase'>checkout</h2>
+          <h2 className='mb-5 border-b-2 pb-2 uppercase'>checkout</h2>
           <CheckoutForm />
         </div>
-
       </div>
     </main>
   )

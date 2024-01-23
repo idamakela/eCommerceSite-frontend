@@ -14,9 +14,7 @@ const Logo = async () => {
         height={24}
         blurDataURL={data?.data?.attributes?.img.data.attributes.mime}
       />
-      <h2 className='font-header font-semibold uppercase'>
-        {data?.data?.attributes?.name}
-      </h2>
+      <h2 className='font-header font-semibold uppercase'>{data?.data?.attributes?.name}</h2>
     </div>
   )
 }

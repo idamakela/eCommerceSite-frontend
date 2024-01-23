@@ -1,7 +1,7 @@
 import Image, { StaticImageData } from 'next/image'
 
-import defaultImage from '@/assets/mulyadi-ZnLprInKM7s-unsplash.jpg'
 import Button from '@/components/Button'
+import defaultImage from '@/assets/mulyadi-ZnLprInKM7s-unsplash.jpg'
 
 interface ProductPageProps {
   title: string
@@ -21,7 +21,7 @@ const ProductPage = ({
   handleOnClick,
 }: ProductPageProps) => {
   return (
-    <>
+    <main className='mt-20 flex flex-col items-center justify-center gap-5 lg:mt-0 lg:h-svh lg:flex-row-reverse lg:justify-evenly lg:px-8'>
       <div className='h-full'>
         <Image
           src={imgUrl}
@@ -32,14 +32,9 @@ const ProductPage = ({
         />
       </div>
       <div className='my-5 p-8'>
-        <h1 className='font-header text-xl font-semibold uppercase md:text-2xl'>
-          {title}
-        </h1>
+        <h1 className='font-header text-xl font-semibold uppercase md:text-2xl'>{title}</h1>
         <p className='mt-5'>{desc}</p>
-        <Button
-          onClick={handleOnClick}
-          className='mt-16 flex w-full justify-between'
-        >
+        <Button onClick={handleOnClick} className='mt-16 flex w-full justify-between'>
           <span>add to cart</span>
           <span>£ {price}</span>
         </Button>
@@ -47,7 +42,7 @@ const ProductPage = ({
           All items are free in checkout
         </p>
       </div>
-    </>
+    </main>
   )
 }
 

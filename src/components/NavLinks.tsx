@@ -40,10 +40,7 @@ const NavLinks = ({ data, category, level = 0, handleRouting }: Props) => {
           {level === 0 ? (
             <Button
               variant='underline'
-              className={cn(
-                'pl-6 text-left',
-                openParents.includes(item.title) && 'border-black',
-              )}
+              className={cn('pl-6 text-left', openParents.includes(item.title) && 'border-black')}
               onClick={handleCategory && (() => handleCategory(item.title))}
             >
               <div className='flex gap-2'>

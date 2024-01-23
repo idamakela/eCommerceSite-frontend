@@ -11,6 +11,9 @@ import { useLockScroll } from '@/hooks/useLockScreen'
 import { getNavigation as fetcher } from '@/api/categories'
 import { categoriesEndpoint as cacheKey } from '@/api/endpoints'
 
+// TODO: error handling
+// TODO: isLoading handling
+
 const Navigation = () => {
   const { error, isLoading, data } = useSWR(cacheKey, fetcher)
   const { open, setOpen } = useNavigation()
@@ -32,8 +35,6 @@ const Navigation = () => {
 
     setOpen(false)
   }
-  // TODO: error handling
-  // TODO: isLoading handling
 
   return (
     <>
