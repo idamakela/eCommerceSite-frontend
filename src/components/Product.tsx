@@ -1,49 +1,53 @@
-import Link from 'next/link'
+'use client'
+
 import Image, { StaticImageData } from 'next/image'
 
+import Button from './Button'
 import defaultImage from '@/assets/mulyadi-ZnLprInKM7s-unsplash.jpg'
 
 interface Props {
   title?: string
-  slug?: string
+  desc?: string
   price?: number
   imgUrl?: string | StaticImageData
-  imgName?: string
-  blurDataURL?: string
-  height?: number
-  width?: number
+  imgAlt?: string
+  paramId?: string
 }
 
 const Product = ({
   title = 'Not Found',
+  desc = 'The product you are trying to find could not be found.',
   price = 99.99,
   imgUrl = defaultImage,
-  imgName = 'Image not found',
-  slug = '/product/not-found',
-  blurDataURL,
-  height = 500,
-  width = 200,
+  imgAlt = 'Not Found',
+  paramId = 'not-found',
 }: Props) => {
+  const handleOnClick = () => {
+    console.log(paramId)
+  }
+
   return (
     <>
-      <Link href={`/product/${slug}`} className='group/productCard flex flex-col'>
-        <div className='max-h-72 flex-grow'>
-          <Image
-            src={imgUrl}
-            alt={imgName}
-            height={height}
-            width={width}
-            blurDataURL={blurDataURL}
-            priority={true}
-            className='h-full w-full object-cover'
-          />
-        </div>
-
-        <div className='transition-all duration-300 group-hover/productCard:pl-3'>
-          <h4 className='pt-1 text-sm capitalize md:text-base'>{title}</h4>
-          <p className='pt-1 text-xs md:text-sm'>{price}</p>
-        </div>
-      </Link>
+      <div className='h-full'>
+        <Image
+          src={imgUrl}
+          alt={imgAlt}
+          height={600}
+          priority={true}
+          className='lg:h-svh lg:w-auto'
+        />
+      </div>
+      <div className='my-5 p-8'>
+        <h1 className='font-header text-xl font-semibold uppercase md:text-2xl'>{title}</h1>
+        <p className='mt-5'>{desc}</p>
+        <Button onClick={handleOnClick} className='mt-16 flex w-full justify-between'>
+          <span>add to cart</span>
+          <span>£ {price}</span>
+        </Button>
+        <p className='pt-1 text-right text-xs font-extralight text-neutral-500'>
+          All items are free in checkout
+        </p>
+      </div>
     </>
   )
 }

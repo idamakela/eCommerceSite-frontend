@@ -1,4 +1,4 @@
-import Product from '@/components/Product'
+import ProductCard from '@/components/ProductCard'
 import { Products } from '@/utils/types'
 
 // TODO: pagination
@@ -14,7 +14,7 @@ export default async function CategoryPage({
 }) {
   const URL = process.env.NEXT_PUBLIC_STRAPI_API_URL
   const endpoint = `/api/${
-    params.category === 'products' ? params.category : `products/${params.category}`
+    params.category === 'products' ? params.category : `products/custom/${params.category}`
   }/${searchParams.subcategory ? searchParams.subcategory : ''}?populate[0]=img`
 
   const res = await fetch(URL + endpoint)
@@ -36,7 +36,7 @@ export default async function CategoryPage({
       <div className='mt-5 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4'>
         {data
           ? data.data.map((item) => (
-              <Product
+              <ProductCard
                 key={item.id}
                 slug={item.id.toString()}
                 title={item.attributes.title}
@@ -48,7 +48,7 @@ export default async function CategoryPage({
                 width={item.attributes.img.data.attributes.formats.small.width}
               />
             ))
-          : Array.from({ length: 10 }, (_, index) => <Product key={index} />)}
+          : Array.from({ length: 10 }, (_, index) => <ProductCard key={index} />)}
       </div>
     </main>
   )
