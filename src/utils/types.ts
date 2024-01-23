@@ -1,13 +1,4 @@
-export type ButtonVariants =
-  | 'filled'
-  | 'underline'
-  | 'outline'
-  | 'muted'
-  | 'ghost'
-  | null
-  | undefined
-
-export type Subcategory = {
+type NavSubcategory = {
   id: number
   title: string
   slug: string
@@ -17,27 +8,43 @@ export type Navigation = {
   id: number
   title: string
   slug: string
-  subcategories: Subcategory[]
+  subcategories: NavSubcategory[]
 }
 
-export type Product = {
+type CategoryAndSubcategory = {
   id: number
   attributes: {
     title: string
     slug: string
+  }
+}
+
+type ImgFormat = {
+  url: string
+  name: string
+  mime: string
+  height: number
+  width: number
+}
+
+export type ProductData = {
+  id: number
+  attributes: {
+    title: string
+    desc: string
+    slug: string
     price: number
+    categories: CategoryAndSubcategory[]
+    subcategories: CategoryAndSubcategory[]
     img: {
       data: {
         id: number
         attributes: {
           formats: {
-            small: {
-              url: string
-              name: string
-              mime: string
-              height: number
-              width: number
-            }
+            large: ImgFormat
+            medium: ImgFormat
+            small: ImgFormat
+            thumbnail: ImgFormat
           }
         }
       }
@@ -45,14 +52,21 @@ export type Product = {
   }
 }
 
-export type Products = {
-  data: Product[]
-  meta: {
-    pagination: {
-      page: number
-      pageSize: number
-      pageCount: number
-      total: number
-    }
+export type Meta = {
+  pagination: {
+    page: number
+    pageSize: number
+    pageCount: number
+    total: number
   }
+}
+
+export type Products = {
+  data: ProductData[]
+  meta: Meta
+}
+
+export type Product = {
+  data: ProductData
+  meta: Meta
 }

@@ -11,6 +11,9 @@ interface Props {
   price?: number
   imgUrl?: string | StaticImageData
   imgAlt?: string
+  height?: number
+  width?: number
+  blurDataURL?: string
   paramId?: string
 }
 
@@ -20,6 +23,9 @@ const Product = ({
   price = 99.99,
   imgUrl = defaultImage,
   imgAlt = 'Not Found',
+  width = 600,
+  height = 300,
+  blurDataURL,
   paramId = 'not-found',
 }: Props) => {
   const handleOnClick = () => {
@@ -32,12 +38,14 @@ const Product = ({
         <Image
           src={imgUrl}
           alt={imgAlt}
-          height={600}
+          height={height}
+          width={width}
           priority={true}
-          className='lg:h-svh lg:w-auto'
+          blurDataURL={blurDataURL}
+          className='w-full max-w-[425px] object-cover lg:h-svh lg:w-auto lg:max-w-max'
         />
       </div>
-      <div className='my-5 p-8'>
+      <div className='my-5 max-w-[490px] p-8 lg:w-[490px]'>
         <h1 className='font-header text-xl font-semibold uppercase md:text-2xl'>{title}</h1>
         <p className='mt-5'>{desc}</p>
         <Button onClick={handleOnClick} className='mt-16 flex w-full justify-between'>
