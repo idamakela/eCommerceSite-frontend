@@ -13,7 +13,13 @@ const Header = () => {
           <Link href='/'>
             <Logo />
           </Link>
-          <div className='flex gap-2'>
+          <div className='flex items-end gap-2'>
+            <Link
+              href={'/products/products'}
+              className='hidden mr-2 border-b-2 border-transparent bg-transparent font-body text-sm font-semibold uppercase text-black transition duration-300 hover:border-black md:block'
+            >
+              products
+            </Link>
             <Link href='/checkout'>
               <ShoppingBag />
             </Link>

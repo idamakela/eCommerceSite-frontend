@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import useSWR, { preload } from 'swr'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 import Button from './Button'
 import NavLinks from './NavLinks'
@@ -15,6 +15,7 @@ import { categoriesEndpoint as cacheKey } from '@/api/endpoints'
 // TODO: isLoading handling
 
 const Navigation = () => {
+  const pathname = usePathname()
   const { error, isLoading, data } = useSWR(cacheKey, fetcher)
   const { open, setOpen } = useNavigation()
   const router = useRouter()
@@ -23,6 +24,10 @@ const Navigation = () => {
   useEffect(() => {
     preload(cacheKey, fetcher)
   }, [])
+
+  useEffect(() => {
+    setOpen(false)
+  }, [pathname, setOpen])
 
   const handleRouting = (category?: string, subcategory?: string) => {
     if (category) {
