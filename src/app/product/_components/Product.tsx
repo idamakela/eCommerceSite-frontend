@@ -1,9 +1,11 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Image, { StaticImageData } from 'next/image'
 
-import Button from '../../../components/Button'
+import Button from '@/components/Button'
 import defaultImage from '@/assets/mulyadi-ZnLprInKM7s-unsplash.jpg'
+import { useCheckout } from '@/hooks/useCheckout'
 
 interface Props {
   title?: string
@@ -28,9 +30,22 @@ const Product = ({
   blurDataURL,
   paramId = 'not-found',
 }: Props) => {
+  const [disable, setDisable] = useState(false)
+  const { setProducts, products } = useCheckout()
+
   const handleOnClick = () => {
-    console.log(paramId)
+    if (!products.includes(paramId)) {
+      setProducts(paramId)
+    }
   }
+
+  useEffect(() => {
+    if (!products.includes(paramId)) {
+      setDisable(false)
+    } else {
+      setDisable(true)
+    }
+  }, [paramId, products, setDisable])
 
   return (
     <>
@@ -48,7 +63,11 @@ const Product = ({
       <div className='my-5 max-w-[490px] p-8 lg:w-[490px]'>
         <h1 className='font-header text-xl font-semibold uppercase md:text-2xl'>{title}</h1>
         <p className='mt-5'>{desc}</p>
-        <Button onClick={handleOnClick} className='mt-16 flex w-full justify-between'>
+        <Button
+          onClick={handleOnClick}
+          disabled={disable}
+          className='mt-16 flex w-full justify-between'
+        >
           <span>add to cart</span>
           <span>£ {price}</span>
         </Button>

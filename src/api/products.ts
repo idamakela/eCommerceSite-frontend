@@ -1,4 +1,4 @@
-// 'use server'
+'use server'
 
 import axios from 'axios'
 
@@ -10,7 +10,7 @@ const storeApi = axios.create({
 
 export const getProduct = async (id: string) => {
   try {
-    const response = await storeApi.get(productsEndpoint + `/${id}?populate=*`)
+    const response = await storeApi.get(productsEndpoint + `/${id}?populate[0]=img`)
     return response.data
   } catch (error) {
     return error
@@ -20,6 +20,15 @@ export const getProduct = async (id: string) => {
 export const getProducts = async (endpoint: string) => {
   try {
     const response = await storeApi.get(productsEndpoint + endpoint + '?populate[0]=img')
+    return response.data
+  } catch (error) {
+    return error
+  }
+}
+
+export const getCheckoutProducts = async (query: string) => {
+  try {
+    const response = await storeApi.get(productsEndpoint + `/?${query}`)
     return response.data
   } catch (error) {
     return error

@@ -4,7 +4,7 @@
  */
 
 import CheckoutForm from './_components/CheckoutForm'
-import CheckoutItem from './_components/CheckoutItem'
+import CheckoutItems from './_components/CheckoutItems'
 
 export default function CheckoutPage() {
   return (
@@ -15,15 +15,13 @@ export default function CheckoutPage() {
         </h1>
       </div>
 
-      <div className='grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-5'>
-        <div>
+      <div className='grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-5 mb-5'>
+        <div className='flex flex-col'>
           <h2 className='border-b-2 pb-2 uppercase'>items</h2>
-          {Array.from({ length: 3 }, (_, index) => (
-            <CheckoutItem key={index} />
-          ))}
+          <CheckoutItems />
         </div>
 
-        <div className='mb-5'>
+        <div>
           <h2 className='mb-5 border-b-2 pb-2 uppercase'>checkout</h2>
           <CheckoutForm />
         </div>
