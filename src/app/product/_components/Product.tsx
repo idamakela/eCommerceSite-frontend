@@ -6,6 +6,7 @@ import Image, { StaticImageData } from 'next/image'
 import Button from '@/components/Button'
 import defaultImage from '@/assets/mulyadi-ZnLprInKM7s-unsplash.jpg'
 import { useCheckout } from '@/hooks/useCheckout'
+import { toast } from 'sonner'
 
 interface Props {
   title?: string
@@ -36,6 +37,7 @@ const Product = ({
   const handleOnClick = () => {
     if (!products.includes(paramId)) {
       setProducts(paramId)
+      toast.success('Added item to your shopping cart')
     }
   }
 
@@ -46,6 +48,8 @@ const Product = ({
       setDisable(true)
     }
   }, [paramId, products, setDisable])
+
+  // TODO: set toaster on added to checkout
 
   return (
     <>

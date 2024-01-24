@@ -1,6 +1,7 @@
 'use client'
 
 import useSWR from 'swr'
+import { toast } from 'sonner'
 import { stringify } from 'qs'
 import { useEffect, useState } from 'react'
 
@@ -11,8 +12,6 @@ import { useCheckout } from '@/hooks/useCheckout'
 import { productsEndpoint as cacheKey } from '@/api/endpoints'
 import { getCheckoutProducts as fetcher } from '@/api/products'
 
-// TODO: remove item from checkout
-// TODO: no items in checkout fallback
 // TODO: error handling
 
 const CheckoutItems = () => {
@@ -24,9 +23,11 @@ const CheckoutItems = () => {
     { revalidateOnMount: false, revalidateOnFocus: false },
   )
 
+  // TODO: remove singular item, last item - doesn't revalidate data (?)
   const handleRemoveItem = (id: string) => {
     removeProduct(id)
     mutate()
+    toast.warning('Removed item from your shopping cart')
   }
 
   useEffect(() => {
@@ -70,6 +71,12 @@ const CheckoutItems = () => {
           width={item.attributes.img.data.attributes.formats.small.width}
         />
       ))}
+
+      {products.length === 0 && (
+        <div className='m-auto p-10 text-muted-foreground'>
+          <h3>{'No items in cart :('}</h3>
+        </div>
+      )}
 
       {/* Should this even be here? - if yes, needs a onClick function
       {Array.from({ length: 3 }, (_, index) => (

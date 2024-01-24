@@ -1,6 +1,7 @@
 'use client'
 
 import * as z from 'zod'
+import { toast } from "sonner"
 import { useForm } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -37,7 +38,16 @@ const CheckoutForm = () => {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values)
+    toast.message("✅ Order created", {
+      description: 'Keep an eye out in your email inbox!'
+    })
+
   }
+
+  // TODO: save order 
+  // TODO: order confirmation - set toaster 
+  // TODO: email order
+  // TODO: gdpr - customer contact info delete after X and Privacy Policy 
 
   return (
     <>

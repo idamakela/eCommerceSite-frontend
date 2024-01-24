@@ -15,7 +15,7 @@ export default function CheckoutPage() {
         </h1>
       </div>
 
-      <div className='grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-5 mb-5'>
+      <div className='mb-5 grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-5'>
         <div className='flex flex-col'>
           <h2 className='border-b-2 pb-2 uppercase'>items</h2>
           <CheckoutItems />

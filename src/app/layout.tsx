@@ -1,6 +1,7 @@
 import './globals.css'
-import { JetBrains_Mono, Kumbh_Sans } from 'next/font/google'
 import type { Metadata } from 'next'
+import { Toaster } from '@/components/ui/sonner'
+import { JetBrains_Mono, Kumbh_Sans } from 'next/font/google'
 
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         {children}
         <Footer />
+        <Toaster /> 
       </body>
     </html>
   )
