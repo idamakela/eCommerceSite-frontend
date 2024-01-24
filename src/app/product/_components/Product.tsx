@@ -18,6 +18,7 @@ interface Props {
   width?: number
   blurDataURL?: string
   paramId?: string
+  image?: string
 }
 
 const Product = ({
@@ -30,13 +31,15 @@ const Product = ({
   height = 300,
   blurDataURL,
   paramId = 'not-found',
+  image,
 }: Props) => {
   const [disable, setDisable] = useState(false)
-  const { setProducts, products } = useCheckout()
+  const { products, setProducts, setImages } = useCheckout()
 
   const handleOnClick = () => {
-    if (!products.includes(paramId)) {
+    if (!products.includes(paramId) && image) {
       setProducts(paramId)
+      setImages({ id: paramId, image })
       toast.success('Added item to your shopping cart')
     }
   }
@@ -48,8 +51,6 @@ const Product = ({
       setDisable(true)
     }
   }, [paramId, products, setDisable])
-
-  // TODO: set toaster on added to checkout
 
   return (
     <>

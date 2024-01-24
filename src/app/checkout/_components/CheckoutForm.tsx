@@ -1,7 +1,7 @@
 'use client'
 
 import * as z from 'zod'
-import { toast } from "sonner"
+import { toast } from 'sonner'
 import { useForm } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/form'
 
 import Button from '@/components/Button'
+import { useCheckout } from '@/hooks/useCheckout'
 
 const formSchema = z.object({
   firstname: z.string(),
@@ -23,7 +24,8 @@ const formSchema = z.object({
 })
 
 const CheckoutForm = () => {
-  // 1. Define your form.
+  const { products, images, resetProducts, resetImages } = useCheckout()
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -33,21 +35,20 @@ const CheckoutForm = () => {
     },
   })
 
-  // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
-    toast.message("✅ Order created", {
-      description: 'Keep an eye out in your email inbox!'
-    })
+    form.reset()
+    resetProducts()
+    resetImages()
 
+    console.log(values)
+    console.log(images)
+
+    toast.message('✅ Order created', {
+      description: "Keep an eye out in your browser's console!",
+    })
   }
 
-  // TODO: save order 
-  // TODO: order confirmation - set toaster 
-  // TODO: email order
-  // TODO: gdpr - customer contact info delete after X and Privacy Policy 
+  // TODO: order easter egg
 
   return (
     <>
@@ -95,7 +96,12 @@ const CheckoutForm = () => {
             )}
           />
 
-          <Button variant='filled' type='submit' className='mt-10 w-full'>
+          <Button
+            disabled={products.length === 0}
+            variant='filled'
+            type='submit'
+            className='mt-10 w-full'
+          >
             Checkout - £ 00.00
           </Button>
         </form>

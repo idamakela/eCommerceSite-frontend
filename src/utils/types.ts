@@ -40,6 +40,7 @@ export type ProductData = {
       data: {
         id: number
         attributes: {
+          url: string
           formats: {
             large: ImgFormat
             medium: ImgFormat

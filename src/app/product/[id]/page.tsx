@@ -14,6 +14,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
           desc={data.attributes.desc}
           title={data.attributes.title}
           price={data.attributes.price}
+          image={data.attributes.img.data.attributes.url}
           imgUrl={data.attributes.img.data.attributes.formats.large.url}
           imgAlt={data.attributes.img.data.attributes.formats.large.name}
           width={data.attributes.img.data.attributes.formats.large.width}

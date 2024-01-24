@@ -16,23 +16,24 @@ import { getCheckoutProducts as fetcher } from '@/api/products'
 
 const CheckoutItems = () => {
   const [query, setQuery] = useState<string>('')
-  const { products, reset, removeProduct } = useCheckout()
+  const { products, resetProducts, removeProduct, removeImage, resetImages } = useCheckout()
   const { data: { data = [] } = {}, mutate } = useSWR<Products>(
     query ? cacheKey : null,
     () => fetcher(query),
     { revalidateOnMount: false, revalidateOnFocus: false },
   )
 
-  // TODO: remove singular item, last item - doesn't revalidate data (?)
+  // TODO: remove singular item if it's the last item - doesn't revalidate data (?)
   const handleRemoveItem = (id: string) => {
     removeProduct(id)
+    removeImage(id)
     mutate()
     toast.warning('Removed item from your shopping cart')
   }
 
   useEffect(() => {
     const getQuery = () => {
-      if (products.length >= 1 || products.length === 1) {
+      if (products.length >= 1) {
         const query = stringify(
           {
             filters: {
@@ -47,10 +48,14 @@ const CheckoutItems = () => {
 
         if (query) setQuery(query)
       }
+
+      if (products.length === 0) {
+        setQuery('')
+      }
     }
 
     getQuery()
-  }, [products])
+  }, [products, mutate])
 
   useEffect(() => {
     mutate()
@@ -88,7 +93,8 @@ const CheckoutItems = () => {
           className='my-4 w-fit self-end'
           variant={'underline'}
           onClick={() => {
-            reset()
+            resetProducts()
+            resetImages()
             setQuery('')
           }}
         >
