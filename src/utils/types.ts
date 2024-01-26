@@ -1,4 +1,4 @@
-type NavSubcategory = {
+export type NavSubcategory = {
   id: number
   title: string
   slug: string

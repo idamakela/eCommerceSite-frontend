@@ -7,10 +7,10 @@ import { ChevronDown, ChevronRight, ChevronUp } from 'lucide-react'
 
 import Button from './Button'
 import { cn } from '@/utils/classnames'
-import { Navigation, Subcategory } from '@/utils/types'
+import { Navigation, NavSubcategory } from '@/utils/types'
 
 interface Props {
-  data: Navigation[] | Subcategory[]
+  data: Navigation[] | NavSubcategory[]
   category?: string
   level?: number
   handleRouting: (category?: string, subcategory?: string) => void
@@ -35,7 +35,7 @@ const NavLinks = ({ data, category, level = 0, handleRouting }: Props) => {
 
   return (
     <>
-      {data?.map((item: Navigation | Subcategory) => (
+      {data?.map((item: Navigation | NavSubcategory) => (
         <div key={item.id} className='flex flex-col gap-y-7 lg:min-w-32'>
           {level === 0 ? (
             <Button
